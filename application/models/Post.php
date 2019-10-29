@@ -17,12 +17,12 @@ class Post extends CI_Model{
             $res['message'] = 'Data Tidak Berhasil Ditambahkan';
         }
 
-        return res;
+        return $res;
     }
 
     public function getAllPost(){
         $query = $this->db->get('post');
-        $result = $query->result;
+        $result = $query->result();
 
         if (empty($result) || is_null($result)) {
             $res['status'] = false;
@@ -37,7 +37,7 @@ class Post extends CI_Model{
 
     public function getPostById($idPost){
         $query = $this->db->where('id_post', $idPost)->get('post');
-        $result = $query->result;
+        $result = $query->result();
 
         if (empty($result) || is_null($result)) {
             $res['status'] = false;

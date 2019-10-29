@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class DataPost extends CI_Controller{
     public function __construct()
     {
+        parent::__construct();
         $this->load->model('Post');
     }
 
@@ -11,7 +12,7 @@ class DataPost extends CI_Controller{
         date_default_timezone_set('Asia/Jakarta');
         $time = new DateTime();
         $data = array(
-            'id_post' => '',
+            'id_post' => 0,
             'id_user' => $this->input->post('id_user'),
             'username' => $this->input->post('username'),
             'post' => $this->input->post('post'),
