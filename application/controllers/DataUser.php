@@ -9,14 +9,14 @@ class DataUser extends CI_Controller{
 
     public function addUser(){
         $data = array(
-            'id' => '',
-            'nama' => $this->input->get('nama'),
-            'username' => $this->input->get('username'),
-            'password' => $this->input->get('password'),
-            'no_hp' => $this->input->get('no_hp')
+            'id' => 0,
+            'nama' => $this->input->post('nama'),
+            'username' => $this->input->post('username'),
+            'password' => $this->input->post('password'),
+            'no_hp' => $this->input->post('no_hp')
         );
 
-        $res = $this->Post->addUser($data);
+        $res = $this->User->addUser($data);
 
         echo json_encode($res);
     }
@@ -28,14 +28,14 @@ class DataUser extends CI_Controller{
     }
 
     public function getDataUser(){
-        $idUser = $this->input->get('id_user');
+        $idUser = $this->input->post('id_user');
         $result = $this->User->getDataUser($idUser);
 
         echo json_encode($result);
     }
 
     public function deleteUser(){
-        $idUser = $this->input->get('id_user');
+        $idUser = $this->input->post('id_user');
         $result = $this->User->deleteUser($idUser);
 
         echo json_encode($result);

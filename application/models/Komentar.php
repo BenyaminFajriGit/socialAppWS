@@ -20,7 +20,7 @@ class Komentar extends CI_Model{
             $res['message'] = 'Data Tidak Berhasil Ditambahkan';
         }
 
-        return res;
+        return $res;
     }
 
     public function getPostComment($idPost){

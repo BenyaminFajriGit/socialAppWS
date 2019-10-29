@@ -63,7 +63,7 @@ class Post extends CI_Model{
             $res['message'] = 'Data tidak berhasil diubah';
         }
 
-        return res;
+        return $res;
     }
 
     public function deletePost($idPost){
@@ -79,7 +79,6 @@ class Post extends CI_Model{
 
         return $res;
     }
-}
 
      public function delete($id){
           return $this->db->delete($this->_table,  array("id" => $id));

@@ -12,9 +12,9 @@ class DataPost extends CI_Controller{
         $time = new DateTime();
         $data = array(
             'id_post' => '',
-            'id_user' => $this->input->get('id_user'),
-            'username' => $this->input->get('username'),
-            'post' => $this->input->get('post'),
+            'id_user' => $this->input->post('id_user'),
+            'username' => $this->input->post('username'),
+            'post' => $this->input->post('post'),
             'waktu' => $time->format('H:i:s')
         );
 
@@ -30,15 +30,15 @@ class DataPost extends CI_Controller{
     }
 
     public function getPostById(){
-        $idPost = $this->input->get('id_post');
+        $idPost = $this->input->post('id_post');
         $res = $this->Post->getPostById($idPost);
 
         echo json_encode($res);
     }
 
     public function updatePost(){
-        $idPost = $this->input->get('id_post');
-        $postCaption = $this->input->get('post');
+        $idPost = $this->input->post('id_post');
+        $postCaption = $this->input->post('post');
 
         $result = $this->Post->updatePost($idPost, $postCaption);
 
@@ -46,7 +46,7 @@ class DataPost extends CI_Controller{
     }
 
     public function deletePost(){
-        $idPost = $this->input->get('id_post');
+        $idPost = $this->input->post('id_post');
         $res = $this->Post->deletePost($idPost);
 
         echo json_encode($res);
