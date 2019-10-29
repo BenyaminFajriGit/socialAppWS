@@ -7,7 +7,7 @@ class User extends CI_Model{
     }
 
     public function addUser($dataUser){
-        $query = $this->db->insert('user', $dataUser);
+        $query = $this->db->insert('users', $dataUser);
 
         if ($query) {
             $res['status'] = true;
@@ -21,7 +21,7 @@ class User extends CI_Model{
     }
 
     public function userAll(){
-        $query = $this->db->get("user");
+        $query = $this->db->get("users");
         $result = $query->result();
 
         if (empty($result) || is_null($result)) {
@@ -37,7 +37,7 @@ class User extends CI_Model{
 
     public function getDataUser($idUser){
         $query = $this->db->where("id", $idUser);
-        $result = $query->get('user')->result();
+        $result = $query->get('users')->result();
 
         if (empty($result) || is_null($result)) {
             $res['status'] = false;
@@ -51,7 +51,7 @@ class User extends CI_Model{
     }
 
     public function deleteUser($idUser){
-        $query = $this->db->delete('user', array('id', $idUser));
+        $query = $this->db->delete('users', array('id', $idUser));
 
         if ($query) {
             $res['status'] = true;
