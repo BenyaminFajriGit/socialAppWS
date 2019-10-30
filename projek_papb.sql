@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Okt 2019 pada 16.54
+-- Waktu pembuatan: 30 Okt 2019 pada 13.41
 -- Versi server: 10.1.37-MariaDB
 -- Versi PHP: 7.2.12
 
@@ -32,8 +32,8 @@ CREATE TABLE `comment` (
   `id_comment` int(11) NOT NULL,
   `id_post` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `comment` longtext NOT NULL
+  `comment` longtext NOT NULL,
+  `waktu` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -45,31 +45,37 @@ CREATE TABLE `comment` (
 CREATE TABLE `post` (
   `id_post` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
   `post` longtext NOT NULL,
-  `waktu` time NOT NULL
+  `waktu` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `post`
+--
+
+INSERT INTO `post` (`id_post`, `id_user`, `post`, `waktu`) VALUES
+(1, 1, 'INI ADALAH SEBUAH POSTINGAN', '2019-10-30 14:30:00');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Struktur dari tabel `user`
 --
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `user` (
+  `id_user` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `no_hp` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data untuk tabel `user`
 --
 
-INSERT INTO `users` (`id`, `nama`, `username`, `password`, `no_hp`) VALUES
-(1, 'Rifki', 'rfksrg', 'hahaha', '');
+INSERT INTO `user` (`id_user`, `nama`, `username`, `password`, `no_hp`) VALUES
+(1, 'Rifki', 'rfksrg', 'hehe', '0987');
 
 --
 -- Indexes for dumped tables
@@ -80,21 +86,21 @@ INSERT INTO `users` (`id`, `nama`, `username`, `password`, `no_hp`) VALUES
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id_comment`),
-  ADD KEY `comment_ibfk_1` (`id_user`),
-  ADD KEY `comment_ibfk_2` (`id_post`);
+  ADD KEY `comment_ibfk_2` (`id_post`),
+  ADD KEY `comment_ibfk_1` (`id_user`);
 
 --
 -- Indeks untuk tabel `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id_post`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `post_ibfk_1` (`id_user`);
 
 --
--- Indeks untuk tabel `users`
+-- Indeks untuk tabel `user`
 --
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
@@ -111,13 +117,13 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT untuk tabel `post`
 --
 ALTER TABLE `post`
-  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_post` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT untuk tabel `user`
 --
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `user`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -127,14 +133,13 @@ ALTER TABLE `users`
 -- Ketidakleluasaan untuk tabel `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`id_post`) REFERENCES `post` (`id_post`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `post`
 --
 ALTER TABLE `post`
-  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
