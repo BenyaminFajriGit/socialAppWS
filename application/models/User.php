@@ -88,8 +88,8 @@ class User extends CI_Model{
         return $res;
     }
 
-    public function getDataUser($username){
-        $query = $this->db->where("username", $username);
+    public function getDataUser($idUser){
+        $query = $this->db->where("id_user", $idUser);
         $result = $query->get('user')->result();
 
         if (empty($result) || is_null($result)) {
@@ -103,8 +103,8 @@ class User extends CI_Model{
         return $res;
     }
 
-    public function deleteUser($username){
-        $query = $this->db->delete('user', array('username' => $username));
+    public function deleteUser($idUser){
+        $query = $this->db->delete('user', array('id_user' => $idUser));
 
         if ($query) {
             $res['status'] = true;
