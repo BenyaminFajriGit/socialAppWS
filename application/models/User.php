@@ -70,14 +70,19 @@ class User extends CI_Model{
     }
 
     public function updateUser($idUser, $newData){
-        $query = $this->db->where('id_user', $idUser)->update('user', $newData);
+        if($this->cekUser($newData['username'])){
+            $query = $this->db->where('id_user', $idUser)->update('user', $newData);
 
-        if ($query) {
-            $res['status'] = true;
-            $res['message'] = 'Data Berhasil Diubah';
+            if ($query) {
+                $res['status'] = true;
+                $res['message'] = 'Data Berhasil Diubah';
+            } else {
+                $res['status'] = false;
+                $res['message'] = 'Data Tidak Berhasil Diubah';
+            }
         } else {
             $res['status'] = false;
-            $res['message'] = 'Data Tidak Berhasil Diubah';
+            $res['message'] = 'Data Sudah Ada';
         }
 
         return $res;
