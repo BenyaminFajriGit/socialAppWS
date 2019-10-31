@@ -71,7 +71,7 @@ class User extends CI_Model{
 
     public function updateUser($idUser, $newData){
         $sameUsername= $this->db->where('username', $newData['username'])->where("id_user!='$idUser'")->get('user');
-        if($sameUsername->num_rows() != 0){
+        if($sameUsername->num_rows() == 0){
             $query = $this->db->where('id_user', $idUser)->update('user', $newData);
 
             if ($query) {
