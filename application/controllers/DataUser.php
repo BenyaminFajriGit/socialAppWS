@@ -52,15 +52,15 @@ class DataUser extends CI_Controller{
     }
 
     public function getDataUser(){
-        $username = $this->input->post('username');
-        $result = $this->User->getDataUser($username);
+        $idUser = $this->input->post('id_user');
+        $result = $this->User->getDataUser($idUser);
 
         echo json_encode($result);
     }
 
     public function deleteUser(){
-        $username = $this->input->post('username');
-        $result = $this->User->deleteUser($username);
+        $idUser = $this->input->post('id_user');
+        $result = $this->User->deleteUser($idUser);
 
         echo json_encode($result);
     }
