@@ -24,8 +24,8 @@ class Komentar extends CI_Model{
     }
 
     public function getPostComment($idPost){
-        $query = $this->db->get('comment')->where('id_post', $idPost);
-        $result = $query->result();
+        $query = $this->db->select('*')->from('comment C')->join('user U', 'C.id_user = U.id_user')->where('C.id_post', $idPost);
+        $result = $query-get()->result();
 
         if (empty($result) || is_null($result)) {
             $res['status'] = false;
