@@ -21,7 +21,7 @@ class Post extends CI_Model{
     }
 
     public function getAllPost(){
-        $query = $this->db->get('post');
+        $query = $this->db->get('post P');
         $result = $query->result();
 
         if (empty($result) || is_null($result)) {
@@ -36,8 +36,10 @@ class Post extends CI_Model{
     }
 
     public function getPostById($idPost){
-        $query = $this->db->where('id_post', $idPost)->get('post');
-        $result = $query->result();
+        // $query = $this->db->where('id_post', $idPost)->get('post');
+        //$this->db->select('*')->from($this->_table)->join($this->_table_product, 'product.id_product = orders.id_product')->where(array('id_invoice'=>$id_invoice))->get()->result();
+        $query = $this->db->select('*')->from('post P')->join('user U', 'P.id_user = U.id_user')->where('P.id_post',$idPost);
+        $result = $query->get()->result();
 
         if (empty($result) || is_null($result)) {
             $res['status'] = false;
