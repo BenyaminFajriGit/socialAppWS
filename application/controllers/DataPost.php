@@ -14,7 +14,6 @@ class DataPost extends CI_Controller{
         $data = array(
             'id_post' => 0,
             'id_user' => $this->input->post('id_user'),
-            'username' => $this->input->post('username'),
             'post' => $this->input->post('post'),
             'waktu' => $time->format('H:i:s')
         );
