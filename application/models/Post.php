@@ -1,15 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Post extends CI_Model{
+class Post extends CI_Model
+{
     public function __construct()
     {
         $this->load->database();
     }
 
-    public function addPost($dataPost){
+    public function addPost($dataPost)
+    {
         $query = $this->db->insert('post', $dataPost);
-        
-        if($query){
+
+        if ($query) {
             $res['status'] = true;
             $res['message'] = 'Data Berhasil Ditambahkan';
         } else {
@@ -20,8 +22,9 @@ class Post extends CI_Model{
         return $res;
     }
 
-    public function getAllPost(){
-        $query = $this->db->get('post P');
+    public function getAllPost()
+    {
+        $query = $this->db->select('*')->from('post P')->join('user U', 'P.id_user = U.id_user');
         $result = $query->result();
 
         if (empty($result) || is_null($result)) {
@@ -35,10 +38,9 @@ class Post extends CI_Model{
         return $res;
     }
 
-    public function getPostById($idPost){
-        // $query = $this->db->where('id_post', $idPost)->get('post');
-        //$this->db->select('*')->from($this->_table)->join($this->_table_product, 'product.id_product = orders.id_product')->where(array('id_invoice'=>$id_invoice))->get()->result();
-        $query = $this->db->select('*')->from('post P')->join('user U', 'P.id_user = U.id_user')->where('P.id_post',$idPost);
+    public function getPostById($idPost)
+    {
+        $query = $this->db->select('*')->from('post P')->join('user U', 'P.id_user = U.id_user')->where('P.id_post', $idPost);
         $result = $query->get()->result();
 
         if (empty($result) || is_null($result)) {
@@ -53,11 +55,12 @@ class Post extends CI_Model{
         return $res;
     }
 
-    public function updatePost($idPost, $newPost){
+    public function updatePost($idPost, $newPost)
+    {
         $this->db->where('id_post', $idPost);
         $query = $this->db->update('post', array('post' => $newPost));
 
-        if($query){
+        if ($query) {
             $res['status'] = true;
             $res['message'] = 'Data berhasil diubah';
         } else {
@@ -68,7 +71,8 @@ class Post extends CI_Model{
         return $res;
     }
 
-    public function deletePost($idPost){
+    public function deletePost($idPost)
+    {
         $query = $this->db->delete('post', array('id_post' => $idPost));
 
         if ($query) {
@@ -82,12 +86,13 @@ class Post extends CI_Model{
         return $res;
     }
 
-     public function delete($id){
-          return $this->db->delete($this->_table,  array("id" => $id));
-     }
+    public function delete($id)
+    {
+        return $this->db->delete($this->_table,  array("id" => $id));
+    }
 
-     public function search($key){
-          return $this->db->like("username",$key)->or_like("judul",$key)->or_like("caption",$key)->get($this->_table)->result();
-     }
-
+    public function search($key)
+    {
+        return $this->db->like("username", $key)->or_like("judul", $key)->or_like("caption", $key)->get($this->_table)->result();
+    }
 }
