@@ -36,11 +36,19 @@ class DataUser extends CI_Controller{
         $newData = array(
             'username' => $this->input->post('username'),
             'nama' => $this->input->post('nama'),
-            'password' => md5($this->input->post('password')),
             'no_hp' => $this->input->post('no_hp')
         );
 
         $res = $this->User->updateUser($idUser, $newData);
+
+        echo json_encode($res);
+    }
+	
+	public function updatePassword(){
+        $idUser = $this->input->post('id_user');
+        $password = md5($this->input->post('password'));
+
+        $res = $this->User->updatePassword($idUser, $password);
 
         echo json_encode($res);
     }
