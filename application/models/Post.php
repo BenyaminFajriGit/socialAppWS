@@ -25,7 +25,7 @@ class Post extends CI_Model
     public function getAllPost()
     {
         $query = $this->db->select('*')->from('post P')->join('user U', 'P.id_user = U.id_user');
-        $result = $query->result();
+        $result = $query->get()->result();
 
         if (empty($result) || is_null($result)) {
             $res['status'] = false;
