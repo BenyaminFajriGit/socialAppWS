@@ -10,12 +10,13 @@ class DataPost extends CI_Controller{
 
     public function addPost(){
         date_default_timezone_set('Asia/Jakarta');
-        $time = new DateTime();
+		$time = new DateTime();
+		$time = date("Y-m-d H:i:s");
         $data = array(
             'id_post' => 0,
             'id_user' => $this->input->post('id_user'),
             'post' => $this->input->post('post'),
-            'waktu' => $time->format('H:i:s')
+            'waktu' => $time
         );
 
         $res = $this->Post->addPost($data);
