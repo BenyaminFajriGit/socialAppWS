@@ -9,11 +9,15 @@ class DataKomentar extends CI_Controller{
     }
 
     public function addComment(){
-        $data = array(
-            'id_post' => $this->input->post('id_post'),
+        date_default_timezone_set('Asia/Jakarta');
+		$time = new DateTime();
+		$time = date("Y-m-d H:i:s");
+		$data = array(
+            'id_comment' => 0,
+			'id_post' => $this->input->post('id_post'),
             'id_user' => $this->input->post('id_user'),
-            'username' => $this->input->post('username'),
-            'comment' => $this->input->post('comment')
+            'comment' => $this->input->post('comment'),
+			'waktu' => $time
         );
 
         $res = $this->Komentar->setComment($data);
