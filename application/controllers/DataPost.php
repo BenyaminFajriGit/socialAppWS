@@ -36,6 +36,13 @@ class DataPost extends CI_Controller{
         echo json_encode($res);
     }
 
+    public function getPostByUserId(){
+        $idUser = $this->input->post('id_user');
+        $res = $this->Post->getPostByUserId($idUser);
+
+        echo json_encode($res);
+    }
+
     public function updatePost(){
         $idPost = $this->input->post('id_post');
         $postCaption = $this->input->post('post');

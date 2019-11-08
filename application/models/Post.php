@@ -55,6 +55,23 @@ class Post extends CI_Model
         return $res;
     }
 
+    public function getPostByUserId($idUser)
+    {
+        $query = $this->db->select('*')->from('post P')->join('user U', 'P.id_user = U.id_user')->where('U.id_user', $idUser);
+        $result = $query->get()->result();
+
+        if (empty($result) || is_null($result)) {
+            $res['status'] = false;
+            $res['message'] = 'Data tidak Ditemukan';
+        } else {
+            $res['status'] = true;
+            $res['message'] = 'Data Ditemukan';
+            $res['data'] = $result;
+        }
+
+        return $res;
+    }
+
     public function updatePost($idPost, $newPost)
     {
         $this->db->where('id_post', $idPost);
