@@ -119,15 +119,15 @@ class User extends CI_Model{
         return $res;
     }
 	
-	public function updatePassword($password, $idUser){
-        $query = $this->db->set('password', $password)->where('id_user', $idUser)->update(user);
+	public function updatePassword($oldPassword,$password, $idUser){
+        $query = $this->db->set('password', $password)->where('id_user', $idUser)->where('password',$oldPassword)->update(user);
 
         if ($query) {
             $res['status'] = true;
             $res['message'] = 'Data Berhasil Diubah';
         } else {
             $res['status'] = false;
-            $res['message'] = 'Data Tidak Berhasil Diubah';
+            $res['message'] = 'password lama salah';
         }
 
         return $res;
