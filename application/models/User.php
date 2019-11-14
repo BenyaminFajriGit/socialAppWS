@@ -84,7 +84,7 @@ class User extends CI_Model{
         }
             else {
             $res['status'] = false;
-            $res['message'] = 'Data Sudah Ada';
+            $res['message'] = 'username sudah digunakan';
         }
 
         return $res;
@@ -120,7 +120,7 @@ class User extends CI_Model{
     }
 	
 	public function updatePassword($oldPassword,$password, $idUser){
-        $query = $this->db->set('password', $password)->where('id_user', $idUser)->where('password',$oldPassword)->update(user);
+        $query = $this->db->set('password', $password)->where('id_user', $idUser)->where('password',$oldPassword)->update('user');
 
         if ($query) {
             $res['status'] = true;
