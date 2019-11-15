@@ -42,7 +42,7 @@ class Komentar extends CI_Model{
     public function deleteComment($idComment){
         $query = $this->db->delete('comment', array('id_comment' => $idComment));
 
-        if ($query) {
+        if ($this->db->affected_rows()==1) {
             $res['status'] = true;
             $res['message'] = 'Data berhasil dihapus';
         } else {
