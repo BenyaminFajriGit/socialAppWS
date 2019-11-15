@@ -75,9 +75,10 @@ class Post extends CI_Model
     public function updatePost($idPost, $newPost)
     {
         $this->db->where('id_post', $idPost);
+        
         $query = $this->db->update('post', array('post' => $newPost));
 
-        if ($query) {
+        if ($this->db->affected_rows() == 1) {
             $res['status'] = true;
             $res['message'] = 'Data berhasil diubah';
         } else {
@@ -92,7 +93,7 @@ class Post extends CI_Model
     {
         $query = $this->db->delete('post', array('id_post' => $idPost));
 
-        if ($query) {
+        if ($this->db->affected_rows()==1) {
             $res['status'] = true;
             $res['message'] = 'Data berhasil dihapus';
         } else {

@@ -108,7 +108,7 @@ class User extends CI_Model{
     public function deleteUser($idUser){
         $query = $this->db->delete('user', array('id_user' => $idUser));
 
-        if ($query) {
+        if ($this->db->affected_rows==1) {
             $res['status'] = true;
             $res['message'] = 'Data berhasil dihapus';
         } else {
